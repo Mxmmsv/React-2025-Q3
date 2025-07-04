@@ -38,6 +38,8 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'react-compiler/react-compiler': 'error',
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-unsafe-assignment': 'error',
       'import/order': [
         'error',
         {
