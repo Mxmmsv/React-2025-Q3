@@ -36,7 +36,7 @@ class Main extends Component {
     }
 
     return (
-      <main className="grid grid-cols-2 gap-4 p-4 md:grid-cols-4">
+      <main className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {characters.map((character) => (
           <CharacterList key={character.id} {...character} />
         ))}
