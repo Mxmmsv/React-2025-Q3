@@ -3,8 +3,7 @@ import { Component } from 'react';
 import type { Character } from '@/api/types';
 import { cn } from '@/utils/cn';
 
-type Props = Character;
-class CharacterList extends Component<Props> {
+class CharacterList extends Component<Character> {
   render() {
     const { image, name, status, species, gender, type } = this.props;
     return (
