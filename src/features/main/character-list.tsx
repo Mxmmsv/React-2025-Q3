@@ -37,9 +37,11 @@ class CharacterList extends Component<Props> {
           <p>Gender:</p>
           <p className="text-gray-600">{gender}</p>
         </div>
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row items-center justify-between gap-5">
           <p>Type:</p>
-          <p className="text-gray-600">{type ? type : 'common'}</p>
+          <p className="truncate text-gray-600" title={type || 'common'}>
+            {type || 'common'}
+          </p>
         </div>
       </div>
     );
