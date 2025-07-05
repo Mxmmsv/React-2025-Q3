@@ -5,7 +5,7 @@ import SearchBar from '@/features/search/search-bar';
 export default class Header extends Component {
   render() {
     return (
-      <header className="flex flex-row items-center justify-between">
+      <header className="flex flex-row items-center justify-between gap-5">
         <div>
           <img
             src="./Rick_and_Morty.svg"
