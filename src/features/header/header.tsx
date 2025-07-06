@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import SearchBar from '@/features/search/search-bar';
+import SearchBar from './search-bar';
 
 export default class Header extends Component {
   render() {
