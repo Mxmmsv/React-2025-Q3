@@ -7,7 +7,6 @@ function App() {
       className="bg-main-background flex min-h-screen flex-col gap-5 bg-repeat p-5"
       style={{
         backgroundImage: `url('./background/rick-head.svg'), url('./background/morty-head.svg')`,
-        backgroundSize: '100px 100px',
         backgroundPosition: '0 0, 50px 50px',
       }}
     >

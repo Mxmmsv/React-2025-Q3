@@ -15,7 +15,7 @@ class CharacterList extends Component<Character> {
           decoding="async"
           className="h-auto w-full rounded-md"
         />
-        <h2 className="mt-2 text-center text-lg font-semibold">{name}</h2>
+        <h2 className="text-muted-hero mt-2 text-center text-xl font-semibold">{name}</h2>
         <div className="flex flex-row items-center justify-between">
           <p>Status:</p>
           <p
