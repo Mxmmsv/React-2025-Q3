@@ -7,7 +7,7 @@ class CharacterList extends Component<Character> {
   render() {
     const { image, name, status, species, gender, type } = this.props;
     return (
-      <div className="rounded-xl p-2 shadow-md">
+      <div className="bg-background rounded-xl p-2 shadow-md">
         <img
           src={image}
           alt={name}

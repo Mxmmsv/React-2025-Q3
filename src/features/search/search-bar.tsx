@@ -7,7 +7,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="flex w-full flex-row gap-10">
-        <Input placeholder="please write smth" id="" name=""></Input>
+        <Input placeholder="please write smth" id="" name="" className="bg-background"></Input>
         <Button>Submit</Button>
       </div>
     );
