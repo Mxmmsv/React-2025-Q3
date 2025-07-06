@@ -14,7 +14,7 @@ class SearchBar extends Component {
 
   handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    localStorage.setItem('INPUT-VALUE', this.state.inputValue);
+    localStorage.setItem('INPUT-VALUE', this.state.inputValue.trim());
     return console.log('input value:', this.state.inputValue);
   };
   render() {
