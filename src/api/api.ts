@@ -9,6 +9,11 @@ function apiRoot() {
       const data = (await response.json()) as CharacterList;
       return data.results;
     },
+    search: async (query: string): Promise<Character[]> => {
+      const response = await fetch(`${BASE_URL}/character/?=name${query}`);
+      const data = (await response.json()) as CharacterList;
+      return data.results;
+    },
   };
 }
 
