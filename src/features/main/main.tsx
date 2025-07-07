@@ -9,30 +9,20 @@ class Main extends Component {
   state: MainState = {
     characters: [],
     isLoading: true,
-    error: null,
   };
 
   async componentDidMount() {
-    try {
-      const characters = await apiRoot().characters();
-      this.setState({ characters, isLoading: false });
-    } catch (error) {
-      this.setState({
-        error: `${error instanceof Error ? error.message : 'smth went wrong >*_*<'}`,
-        isLoading: false,
-      });
-    }
+    const characters = await apiRoot().characters();
+    this.setState({ characters, isLoading: false });
   }
 
+  componentDidUpdate() {}
+
   render() {
-    const { characters, isLoading, error } = this.state;
+    const { characters, isLoading } = this.state;
 
     if (isLoading) {
       return <main>Loading...</main>;
-    }
-
-    if (error) {
-      return <main>Error: {error}</main>;
     }
 
     return (

@@ -5,7 +5,7 @@ import { cn } from '@/utils/cn';
 
 class CharacterList extends Component<Character> {
   render() {
-    const { image, name, status, species, gender, type } = this.props;
+    const { image, name, status, species, gender, type, origin } = this.props;
     return (
       <div className="bg-background rounded-xl p-2 shadow-md">
         <img
@@ -27,6 +27,10 @@ class CharacterList extends Component<Character> {
           >
             {status}
           </p>
+        </div>
+        <div className="flex flex-row items-center justify-between">
+          <p>Origin:</p>
+          <p className="text-gray-600">{origin.name}</p>
         </div>
         <div className="flex flex-row items-center justify-between">
           <p>Species:</p>

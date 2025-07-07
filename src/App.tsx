@@ -1,3 +1,5 @@
+import ErrorBoundary from '@/features/error/error-boundary';
+import ErrorFallback from '@/features/error/fallback';
 import Header from '@/features/header/header';
 import Main from '@/features/main/main';
 
@@ -11,7 +13,9 @@ function App() {
       }}
     >
       <Header />
-      <Main />
+      <ErrorBoundary fallback={<ErrorFallback />}>
+        <Main />
+      </ErrorBoundary>
     </div>
   );
 }
