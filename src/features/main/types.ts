@@ -1,8 +1,7 @@
 import type { Character } from '@/api/types';
 
-type MainState = {
+type MainProps = {
   characters: Character[];
-  isLoading: boolean;
 };
 
-export type { MainState };
+export type { MainProps };

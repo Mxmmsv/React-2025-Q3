@@ -1,35 +1,22 @@
 import { Component } from 'react';
 
-import apiRoot from '@/api/api';
+import ErrorButton from '@/features/error/error-button';
 
 import CharacterList from './character-list';
-import type { MainState } from './types';
+import type { MainProps } from './types';
 
-class Main extends Component {
-  state: MainState = {
-    characters: [],
-    isLoading: true,
-  };
-
-  async componentDidMount() {
-    const characters = await apiRoot().characters();
-    this.setState({ characters, isLoading: false });
-  }
-
-  componentDidUpdate() {}
-
+class Main extends Component<MainProps> {
   render() {
-    const { characters, isLoading } = this.state;
-
-    if (isLoading) {
-      return <main>Loading...</main>;
-    }
+    const { characters } = this.props;
 
     return (
-      <main className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {characters.map((character) => (
-          <CharacterList key={character.id} {...character} />
-        ))}
+      <main className="flex flex-col gap-5">
+        <ErrorButton />
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {characters.map((character) => (
+            <CharacterList key={character.id} {...character} />
+          ))}
+        </div>
       </main>
     );
   }
