@@ -1,9 +1,12 @@
 import { Component, type ChangeEvent, type FormEvent } from 'react';
 
+import apiRoot from '@/api/api';
 import Button from '@/components/button';
 import Input from '@/components/input';
 
-class SearchBar extends Component {
+import type { SearchProps } from './types';
+
+class SearchBar extends Component<SearchProps> {
   state = {
     inputValue: localStorage.getItem('INPUT-VALUE') || '',
   };
@@ -12,23 +15,24 @@ class SearchBar extends Component {
     this.setState({ inputValue: e.target.value });
   };
 
-  handleSubmit = (e: FormEvent) => {
+  handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    localStorage.setItem('INPUT-VALUE', this.state.inputValue.trim());
-    return console.log('input value:', this.state.inputValue);
+    const query = this.state.inputValue.trim();
+    localStorage.setItem('INPUT-VALUE', query);
+    const characters = await apiRoot().search(query);
+    this.props.onSearch(characters);
   };
+
   render() {
     return (
       <form onSubmit={(e) => void this.handleSubmit(e)} className="w-full">
         <div className="flex w-full flex-row gap-10">
           <Input
             placeholder="please write smth"
-            id=""
-            name=""
-            className="bg-background"
             value={this.state.inputValue}
             onChange={this.handleInputChange}
-          ></Input>
+            className="bg-background"
+          />
           <Button type="submit">Submit</Button>
         </div>
       </form>
