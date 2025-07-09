@@ -11,7 +11,7 @@ function apiRoot() {
       return data.results;
     },
     search: async (query: string): Promise<Character[]> => {
-      const response = await fetch(`${BASE_URL}/character/?=name${query}`);
+      const response = await fetch(`${BASE_URL}/character/?name=${query}`);
       responseChecker(response);
       const data = (await response.json()) as CharacterList;
       return data.results;
