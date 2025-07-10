@@ -4,11 +4,13 @@ import apiRoot from '@/api/api';
 import Button from '@/components/button';
 import Input from '@/components/input';
 
-import type { SearchProps } from './types';
+import type { SearchProps, SearchState } from './types';
 
-class SearchBar extends Component<SearchProps> {
+class SearchBar extends Component<SearchProps, SearchState> {
   state = {
     inputValue: localStorage.getItem('INPUT-VALUE') || '',
+    hasError: false,
+    error: null,
   };
 
   handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -19,11 +21,22 @@ class SearchBar extends Component<SearchProps> {
     e.preventDefault();
     const query = this.state.inputValue.trim();
     localStorage.setItem('INPUT-VALUE', query);
-    const characters = await apiRoot().search(query);
-    this.props.onSearch(characters);
+    try {
+      const characters = await apiRoot().search(query);
+      this.props.onSearch(characters);
+    } catch (error) {
+      if (error instanceof Error) {
+        this.setState({ hasError: true, error: error });
+      }
+    }
   };
 
   render() {
+    const { hasError, error } = this.state;
+
+    if (hasError && error) {
+      throw error;
+    }
     return (
       <form onSubmit={(e) => void this.handleSubmit(e)} className="w-full">
         <div className="flex w-full flex-row gap-10">
