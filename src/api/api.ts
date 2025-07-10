@@ -25,8 +25,7 @@ function apiRoot() {
 
 function responseChecker(response: Response) {
   if (!response.ok) {
-    const message = `Error ${response.status}: ${response.statusText}`;
-    throw new Error(message);
+    throw new Error(`${response.status}`);
   }
 }
 
