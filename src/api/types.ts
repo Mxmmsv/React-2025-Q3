@@ -5,18 +5,22 @@ type Character = {
   species: string;
   type: string;
   gender: 'Female' | 'Male' | 'Genderless' | 'unknown';
-  origin: {
-    name: string;
-    url: string;
-  };
-  location: {
-    name: string;
-    url: string;
-  };
+  origin: Origin;
+  location: Location;
   image: string;
   episode: string[];
   url: string;
   created: string;
+};
+
+type Origin = {
+  name: string;
+  url: string;
+};
+
+type Location = {
+  name: string;
+  url: string;
 };
 
 type PaginationInfo = {
@@ -31,4 +35,4 @@ type CharacterList = {
   results: Character[];
 };
 
-export type { Character, PaginationInfo, CharacterList };
+export type { Character, Origin, Location, PaginationInfo, CharacterList };
