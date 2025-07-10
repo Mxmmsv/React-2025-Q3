@@ -1,4 +1,4 @@
-import type { Character, CharacterList, ResponseError } from './types';
+import type { Character, CharacterList } from './types';
 
 const BASE_URL = 'https://rickandmortyapi.com/api';
 
@@ -23,15 +23,9 @@ function apiRoot() {
   };
 }
 
-async function responseChecker(response: Response) {
+function responseChecker(response: Response) {
   if (!response.ok) {
-    let message = `Error ${response.status}: ${response.statusText}`;
-    const data = (await response.json()) as ResponseError;
-
-    if (data?.error) {
-      message += ` – ${data.error}`;
-    }
-
+    const message = `Error ${response.status}: status text${response.statusText}`;
     throw new Error(message);
   }
 }

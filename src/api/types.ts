@@ -31,8 +31,4 @@ type CharacterList = {
   results: Character[];
 };
 
-type ResponseError = {
-  error: string;
-};
-
-export type { Character, PaginationInfo, CharacterList, ResponseError };
+export type { Character, PaginationInfo, CharacterList };
