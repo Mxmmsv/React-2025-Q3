@@ -6,7 +6,6 @@ type SearchProps = {
 
 type SearchState = {
   inputValue: string;
-  hasError: boolean;
   error: Error | null;
 };
 

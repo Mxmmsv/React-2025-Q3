@@ -9,7 +9,6 @@ import type { SearchProps, SearchState } from './types';
 class SearchBar extends Component<SearchProps, SearchState> {
   state = {
     inputValue: localStorage.getItem('INPUT-VALUE') || '',
-    hasError: false,
     error: null,
   };
 
@@ -26,15 +25,15 @@ class SearchBar extends Component<SearchProps, SearchState> {
       this.props.onSearch(characters);
     } catch (error) {
       if (error instanceof Error) {
-        this.setState({ hasError: true, error: error });
+        this.setState({ error: error });
       }
     }
   };
 
   render() {
-    const { hasError, error } = this.state;
+    const { error } = this.state;
 
-    if (hasError && error) {
+    if (error) {
       throw error;
     }
     return (
