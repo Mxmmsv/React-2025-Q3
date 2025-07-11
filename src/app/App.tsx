@@ -3,27 +3,13 @@ import { Component } from 'react';
 import ErrorBoundary from '@/features/error/error-boundary';
 import ErrorFallback from '@/features/error/fallback';
 
-import type { AppState } from './types';
 import Wrapper from './wrapper';
 
-class App extends Component<unknown, AppState> {
-  state = {
-    errorBoundaryKey: 0,
-  };
-
-  handleReset = () => {
-    this.setState((prev) => ({
-      errorBoundaryKey: prev.errorBoundaryKey + 1,
-    }));
-  };
-
+class App extends Component {
   render() {
     return (
       <ErrorBoundary
-        key={this.state.errorBoundaryKey}
-        fallback={(error, errorInfo) => (
-          <ErrorFallback onReset={this.handleReset} error={error} errorInfo={errorInfo} />
-        )}
+        fallback={(error, handleReset) => <ErrorFallback onReset={handleReset} error={error} />}
       >
         <div
           className="bg-main-background flex min-h-screen flex-col gap-5 bg-repeat p-5"

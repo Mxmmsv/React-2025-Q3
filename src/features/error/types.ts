@@ -1,20 +1,18 @@
-import type { ErrorInfo, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 type ErrorFallbackProps = {
   onReset: () => void;
   error: Error;
-  errorInfo: ErrorInfo;
 };
 
 type ErrorBoundaryState = {
   hasError: boolean;
   error: Error | null;
-  errorInfo: ErrorInfo | null;
 };
 
 type ErrorBoundaryProps = {
   children: ReactNode;
-  fallback: (error: Error, info: ErrorInfo) => ReactNode;
+  fallback: (error: Error, onReset: () => void) => ReactNode;
 };
 
 type ErrorButtonState = {
