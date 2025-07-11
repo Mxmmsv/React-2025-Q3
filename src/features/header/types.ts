@@ -1,7 +1,7 @@
 import type { Character } from '@/api/types';
 
 type SearchProps = {
-  onSearch: (characters: Character[]) => void;
+  onSearch: (characters: Character[], isLoading: boolean) => void;
 };
 
 type SearchState = {

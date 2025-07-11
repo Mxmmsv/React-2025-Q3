@@ -21,13 +21,13 @@ class Wrapper extends Component<unknown, WrapperState> {
       this.setState({ characters, isLoading: false });
     } catch (error) {
       if (error instanceof Error) {
-        this.setState({ characters: [], error: error });
+        this.setState({ characters: [], isLoading: false, error: error });
       }
     }
   }
 
-  handleSearch = (characters: Character[]) => {
-    this.setState({ characters });
+  handleSearch = (characters: Character[], isLoading: boolean) => {
+    this.setState({ characters, isLoading });
   };
 
   render() {
@@ -40,7 +40,7 @@ class Wrapper extends Component<unknown, WrapperState> {
     return (
       <>
         <Header onSearch={this.handleSearch} />
-        <Main characters={this.state.characters} />
+        <Main characters={this.state.characters} isLoading={this.state.isLoading} />
       </>
     );
   }

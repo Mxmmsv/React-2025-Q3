@@ -7,7 +7,23 @@ import type { MainProps } from './types';
 
 class Main extends Component<MainProps> {
   render() {
-    const { characters } = this.props;
+    const { characters, isLoading } = this.props;
+
+    if (isLoading) {
+      return (
+        <main className="flex flex-col gap-5">
+          <ErrorButton />
+          <div className="flex flex-col items-center">
+            <img
+              src="./20-min-adventure.gif"
+              alt="loading gif with rick and morty"
+              className="rounded-2xl"
+            />
+            <span className="text-center text-3xl text-white">PLEASE WAIT</span>
+          </div>
+        </main>
+      );
+    }
 
     return (
       <main className="flex flex-col gap-5">

@@ -20,9 +20,10 @@ class SearchBar extends Component<SearchProps, SearchState> {
     e.preventDefault();
     const query = this.state.inputValue.trim();
     localStorage.setItem('INPUT-VALUE', query);
+    this.props.onSearch([], true);
     try {
       const characters = await apiRoot().search(query);
-      this.props.onSearch(characters);
+      this.props.onSearch(characters, false);
     } catch (error) {
       if (error instanceof Error) {
         this.setState({ error: error });
