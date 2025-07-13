@@ -35,6 +35,12 @@ class ErrorFallback extends Component<ErrorFallbackProps> {
               <p>Your current query: {localStorage.getItem('INPUT-VALUE')}</p>
             </>
           )}
+          {error.message !== HttpStatusCode.NOT_FOUND.toString() && (
+            <>
+              <p>Error - {error.message}</p>
+              <p>please check console for more information</p>
+            </>
+          )}
         </div>
         <Button onClick={onReset} className="w-full">
           Reset
