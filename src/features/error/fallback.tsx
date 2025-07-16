@@ -32,7 +32,12 @@ class ErrorFallback extends Component<ErrorFallbackProps> {
             <>
               <p>Error 404 - not found</p>
               <p>please write correct query</p>
-              <p>Your current query: {localStorage.getItem('INPUT-VALUE')}</p>
+            </>
+          )}
+          {error.message !== HttpStatusCode.NOT_FOUND.toString() && (
+            <>
+              <p>Error - {error.message}</p>
+              <p>please check console for more information</p>
             </>
           )}
         </div>
