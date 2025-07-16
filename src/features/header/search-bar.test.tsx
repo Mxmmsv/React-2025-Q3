@@ -70,7 +70,7 @@ describe('Search bar', () => {
       expect(newInput).toHaveValue('Hello World!');
     });
 
-    it('Should call onSearch with result from API', async () => {
+    it('Should call onSearch with succesfull result from API', async () => {
       const user = userEvent.setup();
       render(<SearchBar onSearch={onSearchMock} />);
 
