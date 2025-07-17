@@ -2,15 +2,18 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
+import ErrorBoundary from '@/features/error/error-boundary';
+import ErrorFallback from '@/features/error/fallback';
+
 import SearchBar from './search-bar';
+
+const onSearchMock = vi.fn();
 
 vi.mock('@/api/api', () => ({
   default: () => ({
-    search: vi.fn(() => Promise.resolve(['Rick'])),
+    search: onSearchMock,
   }),
 }));
-
-const onSearchMock = vi.fn();
 
 describe('Search bar', () => {
   beforeEach(() => {
@@ -71,6 +74,7 @@ describe('Search bar', () => {
     });
 
     it('Should call onSearch with succesfull result from API', async () => {
+      onSearchMock.mockResolvedValue(['Rick']);
       const user = userEvent.setup();
       render(<SearchBar onSearch={onSearchMock} />);
 
@@ -83,6 +87,29 @@ describe('Search bar', () => {
 
       await waitFor(() => {
         expect(onSearchMock).toHaveBeenCalledWith(['Rick'], false);
+      });
+    });
+
+    it('Should render error boundary fallback when api return error', async () => {
+      onSearchMock.mockRejectedValue(new Error('404'));
+      const user = userEvent.setup();
+      render(
+        <ErrorBoundary
+          fallback={(error, handleReset) => <ErrorFallback onReset={handleReset} error={error} />}
+        >
+          <SearchBar onSearch={onSearchMock} />
+        </ErrorBoundary>
+      );
+
+      const input = screen.getByPlaceholderText(/please write smth/i);
+      const button = screen.getByRole('button');
+
+      await user.click(input);
+      await user.type(input, 'Hello world!');
+      await user.click(button);
+
+      await waitFor(() => {
+        expect(screen.getByText(/Error 404 - not found/i)).toBeInTheDocument();
       });
     });
   });
