@@ -1,13 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { it, expect, describe } from 'vitest';
 
-import characterMock from './__tests__/character-mock';
+import characterMock from '@/api/__mocks__/characters.mock';
+
 import Main from './main';
 
 describe('Main', () => {
   describe('Render tests', () => {
     it('Should render main', () => {
-      const { container } = render(<Main characters={[characterMock]} isLoading={false} />);
+      const { container } = render(<Main characters={characterMock} isLoading={false} />);
       expect(container).toBeInTheDocument();
     });
 
