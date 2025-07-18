@@ -2,41 +2,40 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
+import { mockApiRoot, searchMock } from '@/api/__mocks__/api.mock';
+import characterMock from '@/api/__mocks__/characters.mock';
 import ErrorBoundary from '@/features/error/error-boundary';
 import ErrorFallback from '@/features/error/fallback';
 
 import SearchBar from './search-bar';
 
-const onSearchMock = vi.fn();
-
 vi.mock('@/api/api', () => ({
-  default: () => ({
-    search: onSearchMock,
-  }),
+  default: () => mockApiRoot(),
 }));
 
 describe('Search bar', () => {
   beforeEach(() => {
     localStorage.clear();
+    vi.clearAllMocks();
   });
 
   describe('Render tests', () => {
     it('Should render search input', () => {
-      render(<SearchBar onSearch={onSearchMock} />);
+      render(<SearchBar onSearch={() => {}} />);
       const input = screen.getByPlaceholderText(/please write smth/i);
 
       expect(input).toBeInTheDocument();
     });
 
     it('Should render submit button', () => {
-      render(<SearchBar onSearch={onSearchMock} />);
+      render(<SearchBar onSearch={() => {}} />);
       const button = screen.getByRole('button');
 
       expect(button).toBeInTheDocument();
     });
 
     it('Should display an empty search query on mount', () => {
-      render(<SearchBar onSearch={onSearchMock} />);
+      render(<SearchBar onSearch={() => {}} />);
       const input = screen.getByPlaceholderText(/please write smth/i);
 
       expect(input).toHaveValue('');
@@ -44,7 +43,7 @@ describe('Search bar', () => {
 
     it('Should display previously saved search query from localStorage on mount', () => {
       localStorage.setItem('INPUT-VALUE', 'Hello World!');
-      render(<SearchBar onSearch={onSearchMock} />);
+      render(<SearchBar onSearch={() => {}} />);
       const input = screen.getByPlaceholderText(/please write smth/i);
 
       expect(input).toHaveValue('Hello World!');
@@ -54,7 +53,7 @@ describe('Search bar', () => {
   describe('User interaction tests', () => {
     it('Should save typed value to localStorage and restore it on next render', async () => {
       const user = userEvent.setup();
-      const component = render(<SearchBar onSearch={onSearchMock} />);
+      const component = render(<SearchBar onSearch={() => {}} />);
 
       const input = screen.getByPlaceholderText(/please write smth/i);
       const button = screen.getByRole('button');
@@ -67,16 +66,16 @@ describe('Search bar', () => {
 
       component.unmount();
 
-      render(<SearchBar onSearch={onSearchMock} />);
+      render(<SearchBar onSearch={() => {}} />);
       const newInput = screen.getByPlaceholderText(/please write smth/i);
 
       expect(newInput).toHaveValue('Hello World!');
     });
 
     it('Should call onSearch with succesfull result from API', async () => {
-      onSearchMock.mockResolvedValue(['Rick']);
+      searchMock.mockResolvedValue([characterMock[0]]);
       const user = userEvent.setup();
-      render(<SearchBar onSearch={onSearchMock} />);
+      render(<SearchBar onSearch={searchMock} />);
 
       const input = screen.getByPlaceholderText(/please write smth/i);
       const button = screen.getByRole('button');
@@ -86,18 +85,18 @@ describe('Search bar', () => {
       await user.click(button);
 
       await waitFor(() => {
-        expect(onSearchMock).toHaveBeenCalledWith(['Rick'], false);
+        expect(searchMock).toHaveBeenCalledWith([characterMock[0]], false);
       });
     });
 
     it('Should render error boundary fallback when api return error', async () => {
-      onSearchMock.mockRejectedValue(new Error('404'));
+      searchMock.mockRejectedValue(new Error('404'));
       const user = userEvent.setup();
       render(
         <ErrorBoundary
           fallback={(error, handleReset) => <ErrorFallback onReset={handleReset} error={error} />}
         >
-          <SearchBar onSearch={onSearchMock} />
+          <SearchBar onSearch={searchMock} />
         </ErrorBoundary>
       );
 
