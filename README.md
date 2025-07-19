@@ -1,69 +1,46 @@
-# React + TypeScript + Vite
+# Rick and Morty RESTful API App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a school project for building a **RESTful API web app** using data from the Rick and Morty API. The project is focused on exploring modern front-end practices, including TypeScript, React, and comprehensive tooling for development and testing.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js (preferably v16+)
+- npm or yarn package manager
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Installation
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+git clone <your-repository-url>
+cd <project-directory>
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Available Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+In the project directory, you can run the following commands:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+| Script          | Description                                                                    |
+| :-------------- | :----------------------------------------------------------------------------- |
+| `dev`           | Start the app in development mode using Vite. Hot-reloads on code changes.     |
+| `build`         | Build the app for production. Runs TypeScript project build, then Vite build.  |
+| `preview`       | Serve the built app locally for previewing the production build.               |
+| `prepare`       | Initialize Husky hooks for git workflow automations (e.g., pre-commit hooks).  |
+| `lint`          | Run ESLint to analyze source code for potential issues or stylistic errors.    |
+| `lint:fix`      | Automatically fix lint errors using ESLint.                                    |
+| `format:fix`    | Format the codebase using Prettier. Applies the project's code style.          |
+| `typecheck`     | Run TypeScript compiler in type-checking mode without generating output files. |
+| `test`          | Run all tests using Vitest. Provides fast feedback during development.         |
+| `test:ui`       | Launch interactive Vitest UI with code coverage.                               |
+| `test:coverage` | Run Vitest tests and output code coverage report.                              |
+
+## Project Structure
+
+- `/src` — All source code and components.
+- `/public` — Static files.
+- `vite.config.ts` — Vite configuration.
+
+## School Task Link
+
+Project is completed as part of the [Rolling Scopes School React Course](https://github.com/rolling-scopes-school/tasks/tree/master/react)
