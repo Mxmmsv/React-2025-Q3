@@ -5,4 +5,8 @@ type MainProps = {
   isLoading: boolean;
 };
 
-export type { MainProps };
+type CharacterListProps = {
+  character: Character;
+};
+
+export type { MainProps, CharacterListProps };

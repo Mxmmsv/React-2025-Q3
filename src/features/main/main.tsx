@@ -30,7 +30,7 @@ class Main extends Component<MainProps> {
         <ErrorButton />
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {characters.map((character) => (
-            <CharacterList key={character.id} {...character} />
+            <CharacterList key={character.id} character={character} />
           ))}
         </div>
       </main>

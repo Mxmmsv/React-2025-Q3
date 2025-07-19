@@ -8,7 +8,7 @@ import CharacterList from './character-list';
 describe('Character list', () => {
   describe('Cender tests', () => {
     it('Should render character list', () => {
-      const { container } = render(<CharacterList {...characterMock[0]} />);
+      const { container } = render(<CharacterList character={characterMock[0]} />);
       expect(container).toBeInTheDocument();
     });
   });
