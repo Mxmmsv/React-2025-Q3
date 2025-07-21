@@ -34,6 +34,7 @@ In the project directory, you can run the following commands:
 | `test`          | Run all tests using Vitest. Provides fast feedback during development.         |
 | `test:ui`       | Launch interactive Vitest UI with code coverage.                               |
 | `test:coverage` | Run Vitest tests and output code coverage report.                              |
+| `spellcheck`    | Check "src/\*_/_.{ts, tsx}" for word mistake                                   |
 
 ## Project Structure
 
