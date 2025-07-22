@@ -15,9 +15,4 @@ type ErrorBoundaryProps = {
   fallback: (error: Error, onReset: () => void) => ReactNode;
 };
 
-type ErrorButtonState = {
-  hasError: boolean;
-  error: Error | null;
-};
-
-export type { ErrorFallbackProps, ErrorBoundaryState, ErrorBoundaryProps, ErrorButtonState };
+export type { ErrorFallbackProps, ErrorBoundaryState, ErrorBoundaryProps };

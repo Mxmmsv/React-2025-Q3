@@ -1,35 +1,28 @@
-import { Component } from 'react';
+import { useState } from 'react';
 
 import apiRoot from '@/api/api';
 import Button from '@/components/button';
 
-import type { ErrorButtonState } from './types';
+function ErrorButton() {
+  const [error, setError] = useState<Error | null>(null);
+  const [hasError, setHasError] = useState(false);
 
-class ErrorButton extends Component<unknown, ErrorButtonState> {
-  state = {
-    hasError: false,
-    error: null,
-  };
-
-  handleClick = async () => {
+  const handleClick = async () => {
     try {
       await apiRoot().error();
     } catch (error) {
       if (error instanceof Error) {
-        this.setState({ hasError: true, error: error });
+        setError(error);
+        setHasError(true);
       }
     }
   };
 
-  render() {
-    const { hasError, error } = this.state;
-
-    if (hasError && error) {
-      throw error;
-    }
-
-    return <Button onClick={this.handleClick}>ERROR BUTTON</Button>;
+  if (hasError && error) {
+    throw error;
   }
+
+  return <Button onClick={handleClick}>ERROR BUTTON</Button>;
 }
 
 export default ErrorButton;
