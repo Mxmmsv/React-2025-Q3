@@ -1,20 +1,21 @@
-import type { Character, CharacterList } from './types';
+import type { CharacterList } from './types';
 
 const BASE_URL = 'https://rickandmortyapi.com/api';
 
 function apiRoot() {
   return {
-    characters: async (): Promise<Character[]> => {
-      const response = await fetch(`${BASE_URL}/character`);
+    characters: async (page = 1): Promise<CharacterList> => {
+      const response = await fetch(`${BASE_URL}/character?page=${page}`);
       responseChecker(response);
       const data = (await response.json()) as CharacterList;
-      return data.results;
+      return data;
     },
-    search: async (query: string): Promise<Character[]> => {
-      const response = await fetch(`${BASE_URL}/character/?name=${query}`);
+
+    search: async (query: string, page = 1): Promise<CharacterList> => {
+      const response = await fetch(`${BASE_URL}/character/?name=${query}&page=${page}`);
       responseChecker(response);
       const data = (await response.json()) as CharacterList;
-      return data.results;
+      return data;
     },
     error: async () => {
       const response = await fetch(`${BASE_URL}/character/1111111111`);

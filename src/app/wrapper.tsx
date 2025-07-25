@@ -7,27 +7,41 @@ import Main from '@/features/main/main';
 import useWrapper from './use-wrapper';
 
 function Wrapper() {
-  const { characters, isLoading, error, handleSearch, setCharacters, setIsLoading, setError } =
-    useWrapper();
+  const {
+    setCharacters,
+    setIsLoading,
+    setError,
+    setTotalPages,
+    characters,
+    isLoading,
+    error,
+    totalPages,
+    query,
+    name,
+    page,
+  } = useWrapper();
 
   useEffect(() => {
     const fetchData = async () => {
-      const query = localStorage.getItem('INPUT-VALUE');
+      setIsLoading(true);
       try {
-        const characters = query ? await apiRoot().search(query) : await apiRoot().characters();
-        setCharacters(characters);
+        const characters = query
+          ? await apiRoot().search(name, page)
+          : await apiRoot().characters(page);
+
+        setCharacters(characters.results);
+        setTotalPages(characters.info.pages);
         setIsLoading(false);
       } catch (error) {
         if (error instanceof Error) {
           setCharacters([]);
-          setIsLoading(false);
           setError(error);
         }
       }
     };
 
     void fetchData();
-  }, [setCharacters, setIsLoading, setError]);
+  }, [page, name, setCharacters, setError, setIsLoading, setTotalPages, query]);
 
   if (error) {
     throw error;
@@ -35,8 +49,8 @@ function Wrapper() {
 
   return (
     <>
-      <Header onSearch={handleSearch} />
-      <Main characters={characters} isLoading={isLoading} />
+      <Header />
+      <Main characters={characters} isLoading={isLoading} totalPages={totalPages} />
     </>
   );
 }

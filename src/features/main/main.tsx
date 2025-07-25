@@ -1,9 +1,10 @@
 import ErrorButton from '@/features/error/error-button';
 
 import CharacterList from './character-list';
+import Pagination from './pagination';
 import type { MainProps } from './types';
 
-function Main({ characters, isLoading }: MainProps) {
+function Main({ characters, isLoading, totalPages }: MainProps) {
   if (isLoading) {
     return (
       <main className="flex flex-col gap-5">
@@ -28,6 +29,7 @@ function Main({ characters, isLoading }: MainProps) {
           <CharacterList key={character.id} character={character} />
         ))}
       </div>
+      <Pagination totalPages={totalPages} />
     </main>
   );
 }

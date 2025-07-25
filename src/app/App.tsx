@@ -1,5 +1,8 @@
+import { Navigate, Route, Routes } from 'react-router';
+
 import ErrorBoundary from '@/features/error/error-boundary';
 import ErrorFallback from '@/features/error/fallback';
+import NotFoundPage from '@/features/not-found/not-found-page';
 
 import Wrapper from './wrapper';
 
@@ -15,7 +18,11 @@ function App() {
           backgroundPosition: '0 0, 50px 50px',
         }}
       >
-        <Wrapper />
+        <Routes>
+          <Route path="/" element={<Navigate to="/characters" />} />
+          <Route path="/characters" element={<Wrapper />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </div>
     </ErrorBoundary>
   );

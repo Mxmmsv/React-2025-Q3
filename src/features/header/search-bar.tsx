@@ -1,11 +1,10 @@
 import Button from '@/components/button';
 import Input from '@/components/input';
 
-import type { SearchBarProps } from './types';
 import useSearchBar from './use-search-bar';
 
-function SearchBar({ onSearch }: SearchBarProps) {
-  const { handleSubmit, handleInputValueChange, inputValue, error } = useSearchBar({ onSearch });
+function SearchBar() {
+  const { handleSubmit, handleInputValueChange, inputValue, error } = useSearchBar();
 
   if (error) {
     throw error;

@@ -1,7 +1,6 @@
 import SearchBar from './search-bar';
-import type { SearchBarProps } from './types';
 
-function Header({ onSearch }: SearchBarProps) {
+function Header() {
   return (
     <header className="flex flex-row items-center justify-between gap-5">
       <div>
@@ -13,7 +12,7 @@ function Header({ onSearch }: SearchBarProps) {
           className="h-16 w-full [filter:drop-shadow(0_0_0_var(--color-muted-hero))] transition duration-300 hover:[filter:drop-shadow(0_0_1rem_var(--color-muted-hero))]"
         />
       </div>
-      <SearchBar onSearch={onSearch} />
+      <SearchBar />
     </header>
   );
 }

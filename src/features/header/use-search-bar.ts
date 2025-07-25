@@ -1,11 +1,9 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 
-import apiRoot from '@/api/api';
+import useSearchQuery from '@/services/use-search-query';
 
-import type { SearchBarProps } from './types';
-
-function useSearchBar({ onSearch }: SearchBarProps) {
-  const [inputValue, setInputValue] = useState(localStorage.getItem('INPUT-VALUE') || '');
+function useSearchBar() {
+  const { setInputValue, submitQuery, inputValue } = useSearchQuery();
   const [error, setError] = useState<Error | null>(null);
 
   const handleInputValueChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -14,12 +12,8 @@ function useSearchBar({ onSearch }: SearchBarProps) {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const query = inputValue.trim();
-    localStorage.setItem('INPUT-VALUE', query);
-    onSearch([], true);
     try {
-      const characters = await apiRoot().search(query);
-      onSearch(characters, false);
+      submitQuery(inputValue);
     } catch (error) {
       if (error instanceof Error) {
         setError(error);
@@ -27,7 +21,12 @@ function useSearchBar({ onSearch }: SearchBarProps) {
     }
   };
 
-  return { setInputValue, setError, handleInputValueChange, handleSubmit, inputValue, error };
+  return {
+    handleSubmit,
+    handleInputValueChange,
+    inputValue,
+    error,
+  };
 }
 
 export default useSearchBar;
