@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 import { mockApiRoot, searchMock } from '@/api/__mocks__/api.mock';
@@ -21,21 +22,33 @@ describe('Search bar', () => {
 
   describe('Render tests', () => {
     it('Should render search input', () => {
-      render(<SearchBar onSearch={() => {}} />);
+      render(
+        <MemoryRouter>
+          <SearchBar />
+        </MemoryRouter>
+      );
       const input = screen.getByPlaceholderText(/please write smth/i);
 
       expect(input).toBeInTheDocument();
     });
 
     it('Should render submit button', () => {
-      render(<SearchBar onSearch={() => {}} />);
+      render(
+        <MemoryRouter>
+          <SearchBar />
+        </MemoryRouter>
+      );
       const button = screen.getByRole('button');
 
       expect(button).toBeInTheDocument();
     });
 
     it('Should display an empty search query on mount', () => {
-      render(<SearchBar onSearch={() => {}} />);
+      render(
+        <MemoryRouter>
+          <SearchBar />
+        </MemoryRouter>
+      );
       const input = screen.getByPlaceholderText(/please write smth/i);
 
       expect(input).toHaveValue('');
@@ -43,7 +56,11 @@ describe('Search bar', () => {
 
     it('Should display previously saved search query from localStorage on mount', () => {
       localStorage.setItem('INPUT-VALUE', 'Hello World!');
-      render(<SearchBar onSearch={() => {}} />);
+      render(
+        <MemoryRouter>
+          <SearchBar />
+        </MemoryRouter>
+      );
       const input = screen.getByPlaceholderText(/please write smth/i);
 
       expect(input).toHaveValue('Hello World!');
@@ -53,7 +70,11 @@ describe('Search bar', () => {
   describe('User interaction tests', () => {
     it('Should save typed value to localStorage and restore it on next render', async () => {
       const user = userEvent.setup();
-      const component = render(<SearchBar onSearch={() => {}} />);
+      const component = render(
+        <MemoryRouter>
+          <SearchBar />
+        </MemoryRouter>
+      );
 
       const input = screen.getByPlaceholderText(/please write smth/i);
       const button = screen.getByRole('button');
@@ -66,7 +87,11 @@ describe('Search bar', () => {
 
       component.unmount();
 
-      render(<SearchBar onSearch={() => {}} />);
+      render(
+        <MemoryRouter>
+          <SearchBar />
+        </MemoryRouter>
+      );
       const newInput = screen.getByPlaceholderText(/please write smth/i);
 
       expect(newInput).toHaveValue('Hello World!');
@@ -75,7 +100,11 @@ describe('Search bar', () => {
     it('Should call onSearch with successful result from API', async () => {
       searchMock.mockResolvedValue([characterMock[0]]);
       const user = userEvent.setup();
-      render(<SearchBar onSearch={searchMock} />);
+      render(
+        <MemoryRouter>
+          <SearchBar />
+        </MemoryRouter>
+      );
 
       const input = screen.getByPlaceholderText(/please write smth/i);
       const button = screen.getByRole('button');
@@ -96,7 +125,9 @@ describe('Search bar', () => {
         <ErrorBoundary
           fallback={(error, handleReset) => <ErrorFallback onReset={handleReset} error={error} />}
         >
-          <SearchBar onSearch={searchMock} />
+          <MemoryRouter>
+            <SearchBar />
+          </MemoryRouter>
         </ErrorBoundary>
       );
 

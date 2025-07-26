@@ -1,11 +1,14 @@
 import { render } from '@testing-library/react';
-import { it, expect, describe } from 'vitest';
+import { MemoryRouter } from 'react-router';
+import { it, expect } from 'vitest';
 
 import Wrapper from './wrapper';
 
-describe('wrapper', () => {
-  it('Should render app', () => {
-    const { container } = render(<Wrapper />);
-    expect(container).toBeInTheDocument();
-  });
+it('Should render app', () => {
+  const { container } = render(
+    <MemoryRouter>
+      <Wrapper />
+    </MemoryRouter>
+  );
+  expect(container).toBeInTheDocument();
 });

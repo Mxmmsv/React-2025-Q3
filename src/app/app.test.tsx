@@ -1,11 +1,14 @@
 import { render } from '@testing-library/react';
-import { it, expect, describe } from 'vitest';
+import { MemoryRouter } from 'react-router';
+import { it, expect } from 'vitest';
 
 import App from './App';
 
-describe('app', () => {
-  it('Should render app', () => {
-    const { container } = render(<App />);
-    expect(container).toBeInTheDocument();
-  });
+it('Should render app', () => {
+  const { container } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
+  );
+  expect(container).toBeInTheDocument();
 });
