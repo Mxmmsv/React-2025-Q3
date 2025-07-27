@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router';
 
+import About from '@/features/about/about';
 import ErrorBoundary from '@/features/error/error-boundary';
 import ErrorFallback from '@/features/error/fallback';
 import NotFoundPage from '@/features/not-found/not-found-page';
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/characters" />} />
           <Route path="/characters" element={<Wrapper />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
