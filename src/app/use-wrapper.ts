@@ -7,52 +7,50 @@ import localStorageService from '@/services/local-storage';
 
 function useWrapper() {
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [totalPages, setTotalPages] = useState(1);
 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const localName = localStorageService().getCharacter() || '';
   const urlName = searchParams.get('name');
+  const localName = localStorageService().getCharacter();
+  const name = urlName ?? '';
   const page = Number(searchParams.get('page')) || 1;
 
   useEffect(() => {
-    if (!urlName && localName) {
-      const newParams = new URLSearchParams(searchParams.toString());
+    if (!urlName && localName && localName.trim()) {
+      const newParams = new URLSearchParams();
       newParams.set('name', localName);
       newParams.set('page', '1');
       navigate({ pathname: '/characters', search: newParams.toString() }, { replace: true });
     }
-  }, [urlName, localName, navigate, searchParams]);
-
-  const name = urlName ?? localName;
+  }, [urlName, localName, navigate]);
 
   useEffect(() => {
+    setIsLoading(true);
+    setError(null);
+
     const fetchData = async () => {
-      setIsLoading(true);
-      setError(null);
       try {
-        const characters = name
+        const data = name.trim()
           ? await apiRoot().search(name, page)
           : await apiRoot().characters(page);
 
-        setCharacters(characters.results);
-        setTotalPages(characters.info.pages);
-      } catch (error) {
-        if (error instanceof Error) {
+        setCharacters(data.results);
+        setTotalPages(data.info.pages);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err);
           setCharacters([]);
-          setError(error);
         }
       } finally {
         setIsLoading(false);
       }
     };
 
-    if (name) {
-      void fetchData();
-    }
+    void fetchData();
   }, [name, page]);
 
   return {
