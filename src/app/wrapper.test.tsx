@@ -4,7 +4,7 @@ import { it, expect } from 'vitest';
 
 import Wrapper from './wrapper';
 
-it('Should render app', () => {
+it('Should render wrapper', () => {
   const { container } = render(
     <MemoryRouter>
       <Wrapper />
