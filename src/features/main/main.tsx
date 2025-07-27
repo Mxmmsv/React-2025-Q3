@@ -1,8 +1,13 @@
+import { useParams } from 'react-router';
+
+import CharacterDetail from './character-detail';
 import CharacterList from './character-list';
 import Pagination from './pagination';
 import type { MainProps } from './types';
 
 function Main({ characters, isLoading, totalPages }: MainProps) {
+  const { id } = useParams();
+
   if (isLoading) {
     return (
       <main className="flex flex-col gap-5">
@@ -20,10 +25,14 @@ function Main({ characters, isLoading, totalPages }: MainProps) {
 
   return (
     <main className="flex flex-col gap-5">
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {characters.map((character) => (
-          <CharacterList key={character.id} character={character} />
-        ))}
+      <div className="flex flex-col gap-6 md:flex-row">
+        <div className="grid flex-1 grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          {characters.map((character) => (
+            <CharacterList key={character.id} character={character} />
+          ))}
+        </div>
+
+        {id && <CharacterDetail />}
       </div>
       <Pagination totalPages={totalPages} />
     </main>
