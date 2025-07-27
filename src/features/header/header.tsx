@@ -7,7 +7,7 @@ function Header() {
     <header className="flex flex-row items-center justify-between gap-5">
       <div>
         <img
-          src="./Rick_and_Morty.svg"
+          src="/Rick_and_Morty.svg"
           alt="Rick and Morty logo"
           loading="lazy"
           decoding="async"
