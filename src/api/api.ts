@@ -17,6 +17,13 @@ function apiRoot() {
       const data = (await response.json()) as CharacterList;
       return data;
     },
+
+    character: async (id: number) => {
+      const response = await fetch(`${BASE_URL}/character/${id}`);
+      responseChecker(response);
+      return response.json();
+    },
+
     error: async () => {
       const response = await fetch(`${BASE_URL}/character/1111111111`);
       responseChecker(response);
