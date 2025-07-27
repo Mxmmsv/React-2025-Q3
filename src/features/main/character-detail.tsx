@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 import apiRoot from '@/api/api';
 import type { Character } from '@/api/types';
@@ -11,6 +11,7 @@ function CharacterDetail() {
   const [character, setCharacter] = useState<Character | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const { search } = useLocation();
 
   useEffect(() => {
     if (!id) return;
@@ -23,15 +24,15 @@ function CharacterDetail() {
   }, [id]);
 
   const handleClick = () => {
-    navigate('/characters');
+    navigate(`/characters${search}`);
   };
-
-  if (!character) {
-    return;
-  }
 
   if (isLoading) {
     return <aside className="p-4 text-white">Loading character...</aside>;
+  }
+
+  if (!character) {
+    return null;
   }
 
   return (
