@@ -3,9 +3,10 @@ import { useSearchParams, useNavigate } from 'react-router';
 
 import apiRoot from '@/api/api';
 import type { Character } from '@/api/types';
-import localStorageService from '@/services/local-storage';
+import useLocalStorage from '@/services/local-storage';
 
 function useWrapper() {
+  const { getCharacter } = useLocalStorage();
   const [characters, setCharacters] = useState<Character[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -15,7 +16,7 @@ function useWrapper() {
   const navigate = useNavigate();
 
   const urlName = searchParams.get('name');
-  const localName = localStorageService().getCharacter();
+  const localName = getCharacter();
   const name = urlName ?? '';
   const page = Number(searchParams.get('page')) || 1;
 
