@@ -2,12 +2,12 @@ import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { it, expect } from 'vitest';
 
-import Wrapper from './wrapper';
+import NotFoundPage from './not-found-page';
 
-it('Should render wrapper', () => {
+it('Should render not found page', () => {
   const { container } = render(
     <MemoryRouter>
-      <Wrapper />
+      <NotFoundPage />
     </MemoryRouter>
   );
   expect(container).toBeInTheDocument();

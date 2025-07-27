@@ -20,10 +20,10 @@ describe('apiRoot', () => {
       json: async () => ({ results: [characterMock] }),
     });
 
-    const characters = await apiRoot().characters();
+    const data = await apiRoot().characters();
 
-    expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/character`);
-    expect(characters).toEqual([characterMock]);
+    expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/character?page=1`);
+    expect(data).toEqual({ results: [characterMock] });
   });
 
   it('Should search characters by name', async () => {
@@ -32,11 +32,23 @@ describe('apiRoot', () => {
       json: async () => ({ results: [characterMock[0]] }),
     });
 
-    const searchQuery = 'Rick';
-    const results = await apiRoot().search(searchQuery);
+    const query = 'Rick';
+    const data = await apiRoot().search(query);
 
-    expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/character/?name=${searchQuery}`);
-    expect(results).toEqual([characterMock[0]]);
+    expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/character/?name=${query}&page=1`);
+    expect(data).toEqual({ results: [characterMock[0]] });
+  });
+
+  it('Should search character by id', async () => {
+    (fetch as Mock).mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ results: [characterMock[0]] }),
+    });
+
+    const id = 1;
+    const data = await apiRoot().character(id);
+    expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/character/${id}`);
+    expect(data).toEqual({ results: [characterMock[0]] });
   });
 
   it('Should throw error when the request is not ok', async () => {

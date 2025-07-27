@@ -7,6 +7,6 @@ export default {
   jsxSingleQuote: false,
   bracketSameLine: false,
   arrowParens: 'always',
-  endOfLine: 'lf',
+  endOfLine: 'auto',
   plugins: ['prettier-plugin-tailwindcss'],
 };
