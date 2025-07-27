@@ -1,5 +1,3 @@
-import ErrorButton from '@/features/error/error-button';
-
 import CharacterList from './character-list';
 import Pagination from './pagination';
 import type { MainProps } from './types';
@@ -8,7 +6,6 @@ function Main({ characters, isLoading, totalPages }: MainProps) {
   if (isLoading) {
     return (
       <main className="flex flex-col gap-5">
-        <ErrorButton />
         <div className="flex flex-col items-center">
           <img
             src="./20-min-adventure.gif"
@@ -23,7 +20,6 @@ function Main({ characters, isLoading, totalPages }: MainProps) {
 
   return (
     <main className="flex flex-col gap-5">
-      <ErrorButton />
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {characters.map((character) => (
           <CharacterList key={character.id} character={character} />
