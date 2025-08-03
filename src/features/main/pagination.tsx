@@ -7,7 +7,7 @@ function Pagination({ totalPages }: PaginationProps) {
   const renderArrow = (label: string, target: number) => (
     <button
       onClick={() => goToPage(target)}
-      className="bg-muted hover:bg-muted/70 rounded px-3 py-1 transition"
+      className="bg-muted-hero hover:bg-muted-hero/70 cursor-pointer rounded px-3 py-1 transition"
     >
       {label}
     </button>
@@ -18,7 +18,9 @@ function Pagination({ totalPages }: PaginationProps) {
       key={page}
       onClick={() => goToPage(page)}
       className={`rounded px-3 py-1 transition ${
-        page === currentPage ? 'bg-accent' : 'bg-background hover:bg-background/80'
+        page === currentPage
+          ? 'bg-chart-4'
+          : 'bg-muted-hero/90 hover:bg-muted-hero/80 cursor-pointer'
       }`}
     >
       {page}

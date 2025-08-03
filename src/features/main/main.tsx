@@ -31,7 +31,6 @@ function Main({ characters, isLoading, totalPages }: MainProps) {
             <CharacterList key={character.id} character={character} />
           ))}
         </div>
-
         {id && <CharacterDetail />}
       </div>
       <Pagination totalPages={totalPages} />

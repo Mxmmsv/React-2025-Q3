@@ -46,38 +46,38 @@ function CharacterDetail() {
       />
       <h2 className="text-muted-hero mt-2 text-center text-xl font-semibold">{character.name}</h2>
       <div className="flex flex-row items-center justify-between">
-        <p>Status:</p>
+        <p className="text-foreground">Status:</p>
         <p
           className={cn(
             character.status === 'Alive' && 'text-chart-2',
             character.status === 'Dead' && 'text-destructive',
-            character.status === 'unknown' && 'text-bg-muted'
+            character.status === 'unknown' && 'text-muted-foreground'
           )}
         >
           {character.status}
         </p>
       </div>
       <div className="flex flex-row items-center justify-between">
-        <p>Origin:</p>
-        <p className="text-gray-600">{character.origin.name}</p>
+        <p className="text-foreground">Origin:</p>
+        <p className="text-muted-foreground">{character.origin.name}</p>
       </div>
       <div className="flex flex-row items-center justify-between">
-        <p>Species:</p>
-        <p className="text-gray-600">{character.species}</p>
+        <p className="text-foreground">Species:</p>
+        <p className="text-muted-foreground">{character.species}</p>
       </div>
       <div className="flex flex-row items-center justify-between">
-        <p>Gender:</p>
-        <p className="text-gray-600">{character.gender}</p>
+        <p className="text-foreground">Gender:</p>
+        <p className="text-muted-foreground">{character.gender}</p>
       </div>
       <div className="flex flex-row items-center justify-between gap-5">
-        <p>Type:</p>
-        <p className="truncate text-gray-600" title={character.type || 'common'}>
+        <p className="text-foreground">Type:</p>
+        <p className="text-muted-foreground truncate" title={character.type || 'common'}>
           {character.type || 'common'}
         </p>
       </div>
       <div className="flex flex-row items-center justify-between gap-5">
-        <p>Created:</p>
-        <p className="truncate text-gray-600" title={character.created}>
+        <p className="text-foreground">Created:</p>
+        <p className="text-muted-foreground truncate" title={character.created}>
           {character.created}
         </p>
       </div>
