@@ -41,7 +41,7 @@ function CharacterList({ character }: CharacterListProps) {
         checked={isSelected}
         onChange={handleCheckboxChange}
         onClick={(e) => e.stopPropagation()}
-        className="absolute top-2 right-2 h-5 w-5 cursor-pointer accent-green-500"
+        className="bg-hero absolute top-2 right-2 h-15 w-15 cursor-pointer"
         aria-label={`Select ${name}`}
       />
 
