@@ -31,7 +31,7 @@ function CharacterList({ character }: CharacterListProps) {
   return (
     <div
       className={cn(
-        'bg-background relative cursor-pointer rounded-xl p-2 shadow-md transition hover:scale-[1.02]',
+        'bg-card relative cursor-pointer rounded-xl p-2 shadow-md transition hover:scale-[1.02]',
         selectedId === String(id) && 'ring-primary ring-2'
       )}
       onClick={() => handleClick(id)}
@@ -54,32 +54,32 @@ function CharacterList({ character }: CharacterListProps) {
       />
       <h2 className="text-muted-hero mt-2 text-center text-xl font-semibold">{name}</h2>
       <div className="flex flex-row items-center justify-between">
-        <p>Status:</p>
+        <p className="text-foreground">Status:</p>
         <p
           className={cn(
             status === 'Alive' && 'text-chart-2',
             status === 'Dead' && 'text-destructive',
-            status === 'unknown' && 'text-bg-muted'
+            status === 'unknown' && 'text-muted-foreground'
           )}
         >
           {status}
         </p>
       </div>
       <div className="flex flex-row items-center justify-between">
-        <p>Origin:</p>
-        <p className="text-gray-600">{origin.name}</p>
+        <p className="text-foreground">Origin:</p>
+        <p className="text-muted-foreground">{origin.name}</p>
       </div>
       <div className="flex flex-row items-center justify-between">
-        <p>Species:</p>
-        <p className="text-gray-600">{species}</p>
+        <p className="text-foreground">Species:</p>
+        <p className="text-muted-foreground">{species}</p>
       </div>
       <div className="flex flex-row items-center justify-between">
-        <p>Gender:</p>
-        <p className="text-gray-600">{gender}</p>
+        <p className="text-foreground">Gender:</p>
+        <p className="text-muted-foreground">{gender}</p>
       </div>
       <div className="flex flex-row items-center justify-between gap-5">
-        <p>Type:</p>
-        <p className="truncate text-gray-600" title={type || 'common'}>
+        <p className="text-foreground">Type:</p>
+        <p className="text-muted-foreground truncate" title={type || 'common'}>
           {type || 'common'}
         </p>
       </div>

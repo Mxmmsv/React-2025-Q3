@@ -19,7 +19,7 @@ function SelectedCharactersPanel() {
   return (
     <div className="bg-background/70 sticky bottom-2 flex flex-col gap-2 rounded-xl p-4 shadow-md">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl">Selected: {selectedCharacters.length}</h2>
+        <h2 className="text-foreground text-2xl">Selected: {selectedCharacters.length}</h2>
         <div className="flex gap-2">
           <button
             onClick={handleReset}
@@ -41,7 +41,7 @@ function SelectedCharactersPanel() {
           {selectedCharacters.map((character) => (
             <li key={character.id} className="w-24 truncate text-center" title={character.name}>
               <div className="flex flex-col items-center gap-2">
-                <p className="text-sm">{character.name}</p>
+                <p className="text-foreground text-sm">{character.name}</p>
                 <img
                   src={character.image}
                   alt={character.name}
