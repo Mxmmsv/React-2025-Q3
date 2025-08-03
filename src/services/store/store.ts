@@ -1,7 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import selectedCharactersReducer from '@/services/store/slice/selectedCharactersSlice';
+
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    selectedCharacters: selectedCharactersReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
