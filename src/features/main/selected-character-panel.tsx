@@ -1,26 +1,23 @@
 import { useSelector } from 'react-redux';
 
 import type { RootState } from '@/services/store/store';
-import { cn } from '@/utils/cn';
 
 function SelectedCharactersPanel() {
   const selectedCharacters = useSelector((state: RootState) => state.selectedCharacters.characters);
 
   return (
-    <div className="flex flex-col gap-5">
-      <h2 className="text-center text-2xl text-white">Selected: {selectedCharacters.length}</h2>
-
-      <ul
-        className={cn(
-          'grid grid-cols-1 flex-col gap-5',
-          selectedCharacters.length >= 10 && 'grid-cols-2'
-        )}
-      >
+    <div className="bg-background/70 sticky bottom-0 flex flex-col gap-2 rounded-xl p-2 shadow-md">
+      <h2 className="text-center text-2xl">Selected: {selectedCharacters.length}</h2>
+      <ul className="flex flex-wrap items-center justify-center">
         {selectedCharacters.map((character) => (
-          <li key={character.id}>
-            <div className="bg-background flex w-full flex-col items-center gap-2 rounded-xl p-2 shadow-md">
-              <h2>{character.name}</h2>
-              <img src={character.image} alt={character.name} className="w-30 rounded-xl" />
+          <li key={character.id} className="w-32 truncate" title={character.name}>
+            <div className="flex flex-col items-center gap-2">
+              <p>{character.name}</p>
+              <img
+                src={character.image}
+                alt={character.name}
+                className="h-16 w-16 rounded-xl object-cover"
+              />
             </div>
           </li>
         ))}
