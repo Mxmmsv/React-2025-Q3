@@ -1,11 +1,16 @@
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+
+import type { RootState } from '@/services/store/store';
 
 import CharacterDetail from './character-detail';
 import CharacterList from './character-list';
 import Pagination from './pagination';
+import SelectedCharactersPanel from './selected-character-panel';
 import type { MainProps } from './types';
 
 function Main({ characters, isLoading, totalPages }: MainProps) {
+  const selectedCharacters = useSelector((state: RootState) => state.selectedCharacters.characters);
   const { id } = useParams();
 
   if (isLoading) {
@@ -26,12 +31,12 @@ function Main({ characters, isLoading, totalPages }: MainProps) {
   return (
     <main className="flex flex-col gap-5">
       <div className="flex flex-col gap-6 md:flex-row">
+        {selectedCharacters.length > 0 && <SelectedCharactersPanel />}
         <div className="grid flex-1 grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {characters.map((character) => (
             <CharacterList key={character.id} character={character} />
           ))}
         </div>
-
         {id && <CharacterDetail />}
       </div>
       <Pagination totalPages={totalPages} />
