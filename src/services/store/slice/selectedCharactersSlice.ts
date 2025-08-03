@@ -23,8 +23,11 @@ const selectedCharactersSlice = createSlice({
     decrement: (state, action: PayloadAction<Character>) => {
       state.characters = state.characters.filter((c) => c.id !== action.payload.id);
     },
+    reset: (state) => {
+      state.characters = [];
+    },
   },
 });
 
-export const { increment, decrement } = selectedCharactersSlice.actions;
+export const { increment, decrement, reset } = selectedCharactersSlice.actions;
 export default selectedCharactersSlice.reducer;
