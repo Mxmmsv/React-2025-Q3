@@ -39,9 +39,9 @@ function SelectedCharactersPanel() {
       <div className="custom-scrollbar mt-2 overflow-x-auto">
         <ul className="flex min-w-fit gap-4">
           {selectedCharacters.map((character) => (
-            <li key={character.id} className="w-24 truncate text-center" title={character.name}>
+            <li key={character.id} className="w-24 truncate" title={character.name}>
               <div className="flex flex-col items-center gap-2">
-                <p className="text-foreground text-sm">{character.name}</p>
+                <p className="text-foreground w-full truncate text-sm">{character.name}</p>
                 <img
                   src={character.image}
                   alt={character.name}
